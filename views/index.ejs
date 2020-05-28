@@ -45,7 +45,7 @@ AFRAME.registerComponent('floor', {
                     };
             console.log(position);
         });
-        
+
     }
 });
         </script>
@@ -55,7 +55,7 @@ AFRAME.registerComponent('floor', {
                 <a-asset-item id="houseg" src='/house.glb'></a-asset-item>
             </a-assets>
             <a-entity id="floot" gltf-part="src: #house; part:Living-Floor" floor></a-entity>
-            <a-entity gltf-model="#houseg" shadow="cast: true; receive: true"></a-entity>
+            <!-- <a-entity gltf-model="#houseg" shadow="cast: true; receive: true"></a-entity> -->
             <a-entity light="color: #e3e1d2;type: ambient; angle: 75; intensity: 0.65" position="2.81195 2.12972 0.1144"></a-entity>
             <a-entity light="color: #e3e1d2;castShadow: true; type: directional; intensity: 0.9;" position="2.81195 2.12972 0.1144"></a-entity>
             <a-entity light="color: #e3e1d2;castShadow: true; type: point; intensity: 0.3;" position="2.81195 2.12972 0.1144"></a-entity>
