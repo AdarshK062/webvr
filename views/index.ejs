@@ -1,73 +1,338 @@
-<!-- <html>
-    <head>
-        <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    </head>
-    <body>
-        <a-scene shadow="autoUpdate: true">
-            <a-assets>
-                <a-asset-item
-                    id="house"
-                    src='/house.glb'
-                ></a-asset-item>
-            </a-assets>
-            <a-entity gltf-model="#house" shadow="cast: true; receive: true">
-            </a-entity>
-            <a-entity light="color: #e3e1d2;type: ambient; angle: 75; intensity: 0.65" position="2.81195 2.12972 0.1144"></a-entity>
-            <a-entity light="color: #e3e1d2;castShadow: true; type: directional; intensity: 0.9;" position="2.81195 2.12972 0.1144"></a-entity>
-            <a-entity light="color: #e3e1d2;castShadow: true; type: point; intensity: 0.3;" position="2.81195 2.12972 0.1144"></a-entity>
-            <a-entity light="color: #e3e1d2;type: point; castShadow: true; intensity:  2.5;"  position="-8.67 5.712-0.267"></a-entity>
-            <a-entity light="color: #e3e1d2; intensity: 0.2; type: point;" position="-9.951 4.403 -25.740"></a-entity>
-        </a-scene>
-    </body>
-</html> -->
-
-
 <html>
     <head>
-        <title>My A-Frame Scene</title>
         <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-        <script src="https://unpkg.com/aframe-gltf-part-component/dist/aframe-gltf-part-component.min.js"></script>
+        <style>
+            div {
+                position: absolute;
+                bottom: 2%;
+                left: 50%;
+                margin-right: -50%;
+                transform: translate(-50%, -50%);
+                z-index: 1;
+                text-align: center;
+            }
+
+            button {
+                display: inline-block;
+            }
+            .card{
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                display: inline-block;
+                width:80px;
+                height: 94.5px;
+                margin-left: 3px;
+                margin-right: 3px;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+            
+.circleWrapper{
+    z-index: 5;
+    position: relative;
+    bottom: 30%;
+    left: 95%;
+}
+
+/*circle animation*/
+
+.circle {
+    z-index: 5;
+    border-radius: 50%;
+    background-color: deepskyblue;
+    width: 30px;
+    height: 30px;
+    /* position: absolute; */
+}
+.cw {
+    z-index: 5;
+    border-radius: 50%;
+    background-color: rgb(235, 20, 13);
+    width: 30px;
+    height: 30px;
+top:20px;
+}
+
+        </style>
     </head>
-
     <body>
-        <script>
-AFRAME.registerComponent('floor', {
-    init: function() {
-        var batpos=document.querySelector('#floot');
-        var pos=batpos.getAttribute('position');
-        pos.y=pos.y+0.001;
-        batpos.setAttribute('position',pos);
-        batpos.addEventListener('click', event => {
-            let position = {
-                        x: event.detail.intersection.point.x,
-                        y: 0.1,
-                        z: event.detail.intersection.point.z
-                    };
-            console.log(position);
-        });
-
-    }
-});
-        </script>
-        <a-scene shadow="autoUpdate: true">
+        <a-scene>
             <a-assets>
-                <a-asset-item id="house" src="/house.gltf"></a-asset-item>
-                <a-asset-item id="houseg" src='/house.glb'></a-asset-item>
+                <!-- <a-asset-item id="one" src="/one.glb"></a-asset-item> -->
+                <a-asset-item id="three" src="/b.glb"></a-asset-item>
+                <a-asset-item id="four" src="/cd.glb"></a-asset-item>
+                <!-- <a-asset-item id="two" src="/two.glb"></a-asset-item> -->
+                <img id="floor" src="/tablones-madera-suelo-parquet-fondo-textura/2145.jpg" />
+                <img id="wall" src="/gray-concrete-wall/89246.jpg" />
+                <img id="stage" src="/jon-moore-5fIoyoKlz7A-unsplash.jpg">
             </a-assets>
-            <a-entity id="floot" gltf-part="src: #house; part:Living-Floor" floor></a-entity>
-            <a-entity gltf-model="#houseg" shadow="cast: true; receive: true"></a-entity>
-            <a-entity light="color: #e3e1d2;type: ambient; angle: 75; intensity: 0.65" position="2.81195 2.12972 0.1144"></a-entity>
-            <a-entity light="color: #e3e1d2;castShadow: true; type: directional; intensity: 0.9;" position="2.81195 2.12972 0.1144"></a-entity>
-            <a-entity light="color: #e3e1d2;castShadow: true; type: point; intensity: 0.3;" position="2.81195 2.12972 0.1144"></a-entity>
-            <a-entity light="color: #e3e1d2;type: point; castShadow: true; intensity:  2.5;"  position="-8.67 5.712-0.267"></a-entity>
-            <a-entity light="color: #e3e1d2; intensity: 0.2; type: point;" position="-9.951 4.403 -25.740"></a-entity>
-
-            <a-entity id='cameraWrappers1' position="0 0 0" rotation="0 0 0">
-                <a-camera rotation-reader position="0 1.6 0" id="cameraPositions1">
-                    <!-- <a-entity progressive-controls></a-entity> -->
-                    <a-cursor id="cam2cursor" color="#f000f0" material="" raycaster="" cursor="" geometry="" position="0 0 -1" scale="1.5 1.5 1.5"></a-cursor>
+            
+            <a-plane
+                id="plane"
+                position="0 0 0"
+                rotation="-90 0 0"
+                width="16"
+                height="16"
+                src="#floor" log
+            ></a-plane>
+            <a-plane
+                id="wall1"
+                position="-8 2.5 0"
+                height="5"
+                width="16"
+                rotation="0 90 0"
+                src="#wall"
+            ></a-plane>
+            <a-plane
+                id="wall2"
+                position="8 2.5 0"
+                height="5"
+                width="16"
+                rotation="0 -90 0"
+                src="#wall"
+            ></a-plane>
+            <a-plane
+                id="wall3"
+                position="0 2.5 8"
+                height="5"
+                width="16"
+                rotation="0 -180 0"
+                src="#wall"
+            ></a-plane>
+            <a-plane
+                id="wall4"
+                position="0 2.5 -8"
+                height="5"
+                width="16"
+                rotation="0 0 0"
+                src="#wall"
+            ></a-plane>
+            <a-plane
+                id="ceiling"
+                position="0 5 0"
+                height="16"
+                width="16"
+                rotation="90 0 0"
+                src="#wall"
+            ></a-plane>
+            <a-box
+                id="stage"
+                position="0 0 -6"
+                width = "13"
+                height="1.5"
+                depth="4"
+                src="#stage"
+            ></a-box>
+            <!-- <a-gltf-model src="#curtain" scale="0.22 0.131 0.1" width="16" position="0 0 -7.5"></a-gltf-model> -->
+            <a-entity id="parent" position="0 0 0"></a-entity>
+            <a-entity id="cam" position="7 3 7" rotation="0 45 0">
+                <a-camera>
+                    <!-- <a-cursor></a-cursor> -->
                 </a-camera>
             </a-entity>
+            <a-sky color="skyblue"></a-sky>
+            <a-entity id='a' type="directional" light="intensity: 0.4;  color: #ffffff" position="7 6 3" ></a-entity>
+            <a-entity id='b' type="directional" light="intensity: 0.4;  color: #ffffff" position="-7 6 3"></a-entity>
+            <a-entity id='c' type="directional" light="intensity: 0.4;  color: #ffffff" position="7 6 -10"></a-entity>
+            <a-entity id='d' type="directional" light="intensity: 0.4;  type: ambient" position="0 8.71883 -3.18619"></a-entity>
         </a-scene>
+        <script>
+            var objsel='0';
+var tel=0;
+var prevpos=undefined;
+const plane = document.getElementById("plane");
+var planeLength = parseFloat(plane.getAttribute("height"));
+planeLength -= 1;
+var planeWidth = parseFloat(plane.getAttribute("width"));
+planeWidth -= 1;
+const parent = document.getElementById("parent");
+let maxCount = 0;
+for(i = -(planeLength/2)+6.0; i<=(planeLength/2)-1.0; i += 3.0) {
+   for(j = -(planeWidth/2)+2.0; j<=(planeWidth/2)-1.0; j+=3.0) {
+    maxCount++;
+   }
+   console.log(i);
+}
+console.log(maxCount);
+function objectSelect(x){
+   objsel=x;
+}
+let count = 0;
+for(i = -(planeLength/2)+6.0; i<=(planeLength/2)-1.0 && count <= maxCount; i += 3.0) {
+   for(j = -(planeWidth/2)+2.0; j<=(planeWidth/2)-1.0 && count <= maxCount; j+=3.0) {
+    var box = document.createElement("a-entity");
+    box.setAttribute("geometry","primitive: box");
+    box.setAttribute("material","color: #0000FF; opacity: 0.5; wireframe: true");
+    box.setAttribute("width","1");
+    box.setAttribute("height", "1");
+    box.setAttribute("depth", "1");
+    box.setAttribute("position", j+ " 0.5 " +i);
+    box.setAttribute("class","place");
+    box.setAttribute("objectsel","0");
+    box.setAttribute("change-color","");
+    count++;
+    parent.appendChild(box);
+   }
+}
+
+function next(){
+   document.getElementById("objs").style.display="none";
+   document.getElementById("lights").style.display="block";
+   objsel='0';
+}
+
+function previous(){
+   document.getElementById("objs").style.display="block";
+   document.getElementById("lights").style.display="none";
+}
+function dolleye(){
+   var cam=document.getElementById("cam");
+   if(prevpos==undefined){
+      prevpos=cam.getAttribute("position");
+      cam.setAttribute("position","7 3 -7");
+      cam.setAttribute("rotation","0 70 0");
+      tel=0;
+   }
+   else{
+      cam.setAttribute("position", "5 1.6 7");
+      cam.setAttribute("rotation","0 0 0");
+      tel=1;
+      prevpos=undefined;
+   }
+}
+if (window.AFRAME == null) {
+   console.error("aframe not found, please import it before this component.");
+}
+
+AFRAME.registerSystem("track-cursor", {
+   init: function () {
+       this.el.setAttribute("cursor", { rayOrigin: "mouse" });
+       this.el.setAttribute("cursor", { color: "black" });
+   },
+});
+AFRAME.registerComponent("log", {
+   init: function () {
+       this.el.addEventListener("click", (evt) => {
+      //   console.log('a');
+         if(tel==1){
+           var cam = document.querySelector("#cam");
+           let animation =
+               "property: position; to:" +
+               event.detail.intersection.point.x +
+               " 1.6 " +
+               event.detail.intersection.point.z +
+               " " +
+               "; dur: 1000";
+           
+           cam.setAttribute("animation", animation);
+         }
+       });
+   },
+});
+
+function lightSelect(x){
+   if(x=='0'){
+      document.getElementById('a').setAttribute("light", "intensity: 0.4;  color: #ffffff");
+      document.getElementById('b').setAttribute("light", "intensity: 0.4;  color: #ffffff");
+      document.getElementById('c').setAttribute("light", "intensity: 0.4;  color: #ffffff");
+      document.getElementById('d').setAttribute("light", "intensity: 0.4; type: ambient");
+   }
+   else if(x=='1'){
+      document.getElementById('a').setAttribute("light", "intensity: 0.5; color: #fff952");
+      document.getElementById('b').setAttribute("light", "intensity: 0.5; color: #fff952");
+      document.getElementById('c').setAttribute("light", "intensity: 0.5; color: #fff952");
+      document.getElementById('d').setAttribute("light", "intensity: 0.4; type: ambient");
+   }
+   else if(x=='2'){
+      document.getElementById('a').setAttribute("light", "intensity: 0.4; color: #fffdcc");
+      document.getElementById('b').setAttribute("light", "intensity: 0.4; color: #fffdcc");
+      document.getElementById('c').setAttribute("light", "intensity: 0.4; color: #fffdcc");
+      document.getElementById('d').setAttribute("light", "intensity: 0.4; type: ambient");
+   }
+   else{
+      document.getElementById('a').setAttribute("light", "intensity: 0.4; color: #ffb3b3");
+      document.getElementById('b').setAttribute("light", "intensity: 0.4; color: #ffb3b3");
+      document.getElementById('c').setAttribute("light", "intensity: 0.4; color: #ffb3b3");
+      document.getElementById('d').setAttribute("light", "intensity: 0.5; type: ambient");
+   }
+}
+function selectall(){
+   document.querySelectorAll('.place').forEach(item => {
+      if(objsel=="1"){
+         item.setAttribute("material","color: #66b3ff");
+       }
+       else if(objsel=="2"){
+         item.setAttribute("material","color: #ff5050");
+       }
+      item.setAttribute("objectsel",objsel);
+   });
+}
+
+function finish(){
+   document.querySelectorAll('.place').forEach(item => {
+      var cx=item.getAttribute("objectsel");
+      item.setAttribute("geometry","");
+      item.setAttribute("material","");
+      item.setAttribute("rotation","0 180 0");
+      var pos=item.getAttribute("position");
+      tel=1;
+      if(cx==1){
+         pos.z+=1.5;
+         item.setAttribute("gltf-model","#three");
+         item.setAttribute("scale","5 5 5");
+      }
+      else if(cx==2){
+         item.setAttribute("gltf-model","#four");
+         // item.setAttribute("scale","2 2 2");
+         pos.y-=0.5;
+      }
+      else if(cx==0){
+         item.parentNode.removeChild(item);
+      }
+      item.setAttribute("position",pos);
+      document.getElementById("cam").setAttribute("position","5 1.6 7");
+      document.getElementById("cam").setAttribute("rotation","0 0 0");
+      document.getElementById("lights").style.display="none";
+      document.getElementById("abcd").style.display="block";
+   });
+}
+
+AFRAME.registerComponent('change-color', {
+   init: function(){
+     this.el.addEventListener('click', function(){
+      if(objsel=="1"){
+        this.setAttribute("material","color: #66b3ff");
+      }
+      else if(objsel=="2"){
+        this.setAttribute("material","color: #ff5050");
+      }
+     this.setAttribute("objectsel",objsel);
+     });
+
+   }                
+ });
+        </script>
+        
+        <div id="objs">
+            <button class="card" id="objmtl" onclick="objectSelect('1')">Table one</button>
+            <button class="card" id="green" onclick="objectSelect('2')">Table two</button>
+            <button class="card" id="all" onclick="selectall()">Select all</button>
+            <button class="card" id="finish" onclick="next()">Next</button>
+        </div>
+        
+        <div id="lights" style="display: none;">
+            <button class="card" id="objmtl1" onclick="previous()">Previous</button>
+            <button class="card" id="objmtl0" onclick="lightSelect('0')">Light1</button>
+            <button class="card" id="objmtl2" onclick="lightSelect('1')">Light2</button>
+            <button class="card" id="green1" onclick="lightSelect('2')">Light3</button>
+            <button class="card" id="green2" onclick="lightSelect('3')">Light4</button>
+            <button class="card" id="finish1" onclick="finish()">Finish</button>
+        </div>
+
+        <div class="circleWrapper" id="abcd" style="display: none;">
+            <div class="circle" id="collapse1" onclick="dolleye()"></div>
+            <!-- <div class="cw" onclick="exit()"></div> -->
+        </div>
+        <!-- <script src="script.js"></script> -->
     </body>
 </html>
